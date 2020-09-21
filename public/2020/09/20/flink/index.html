@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>flink | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开发文档地址： 1https:&#x2F;&#x2F;ci.apache.org&#x2F;projects&#x2F;flink&#x2F;flink-docs-release-1.9&#x2F;dev&#x2F;types_serialization.html  Stateful Computations over Data Streams离线处理&#x2F;批处理 有没有状态？ 一般不需要状态   U">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flink">
+<meta property="og:url" content="http://example.com/2020/09/20/flink/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="开发文档地址： 1https:&#x2F;&#x2F;ci.apache.org&#x2F;projects&#x2F;flink&#x2F;flink-docs-release-1.9&#x2F;dev&#x2F;types_serialization.html  Stateful Computations over Data Streams离线处理&#x2F;批处理 有没有状态？ 一般不需要状态   U">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-20T03:34:16.990Z">
+<meta property="article:modified_time" content="2020-09-20T03:34:17.045Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="新建,模板,小书匠">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-flink" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/20/flink/" class="article-date">
+  <time datetime="2020-09-20T03:34:16.990Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flink
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开发文档地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;ci.apache.org&#x2F;projects&#x2F;flink&#x2F;flink-docs-release-1.9&#x2F;dev&#x2F;types_serialization.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stateful-Computations-over-Data-Streams"><a href="#Stateful-Computations-over-Data-Streams" class="headerlink" title="Stateful Computations over Data Streams"></a>Stateful Computations over Data Streams</h3><pre><code>离线处理/批处理 有没有状态？ 一般不需要状态
+
+
+Unbound stream  无界的   就是流处理
+bound stream    有界的        批处理
+
+
+flink比较好的：</code></pre>
+<p>Depending on the type of data sources, i.e. bounded or unbounded sources, you would either write a batch program or a streaming program where the DataSet API is used for batch and the DataStream API is used for streaming. </p>
+<h3 id="DataSet-and-DataStream"><a href="#DataSet-and-DataStream" class="headerlink" title="DataSet and DataStream"></a>DataSet and DataStream</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Flink has the special classes DataSet and DataStream to represent data in a program. You can think of them as immutable collections of data that can contain duplicates. In the case of DataSet the data is finite while for a DataStream the number of elements can be unbounded.</span><br><span class="line"></span><br><span class="line">These collections differ from regular Java collections in some key ways. First, they are immutable, meaning that once they are created you cannot add or remove elements. You can also not simply inspect the elements inside.</span><br><span class="line"></span><br><span class="line">A collection is initially created by adding a source in a Flink program and new collections are derived from these by transforming them using API methods such as map, filter and so on.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Anatomy-of-a-Flink-Program"><a href="#Anatomy-of-a-Flink-Program" class="headerlink" title="Anatomy of a Flink Program"></a>Anatomy of a Flink Program</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Flink programs look like regular programs that transform collections of data. Each program consists of the same basic parts:</span><br><span class="line"></span><br><span class="line">Obtain an execution environment,</span><br><span class="line">Load&#x2F;create the initial data,</span><br><span class="line">Specify transformations on this data,</span><br><span class="line">Specify where to put the results of your computations,</span><br><span class="line">Trigger the program execution</span><br></pre></td></tr></table></figure>
+
+<h3 id="flink的connect算子"><a href="#flink的connect算子" class="headerlink" title="flink的connect算子"></a>flink的connect算子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connect算子可以合并两个DataStream对象，两个DataStream的类型不必一致</span><br><span class="line">union	算子同样可以合并两个DataStream对象，两个DataStream的类型需要一致</span><br></pre></td></tr></table></figure>
+
+<h3 id="flink的自定义分区器"><a href="#flink的自定义分区器" class="headerlink" title="flink的自定义分区器"></a>flink的自定义分区器</h3><p>  步骤：</p>
+<ol>
+<li><p>继承Partitioner类，定义输入类型为范型 </p>
+</li>
+<li><p>实现partition方法</p>
+</li>
+<li><p>返回分区数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  class LikerPartitioner extends Partitioner[String]&#123;</span><br><span class="line">  <span class="function">override def <span class="title">partition</span><span class="params">(key: String, numPartitions: Int)</span>: Int </span>= &#123;</span><br><span class="line">    <span class="keyword">if</span>(key == <span class="string">&quot;liker&quot;</span>)&#123;</span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="string">&quot;erlei&quot;</span>)&#123;</span><br><span class="line">      <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="string">&quot;hehe&quot;</span>)&#123;</span><br><span class="line">      <span class="number">2</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	  <span class="number">3</span></span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义DataSource"><a href="#自定义DataSource" class="headerlink" title="自定义DataSource"></a>自定义DataSource</h3><p> DataSource有如下几种</p>
+<ol>
+<li>SourceFunction</li>
+<li>RichSourceFunction</li>
+<li>ParallelSourceFunction</li>
+<li>RichParallelSourceFunction<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">其中SourceFunction和ParallelSourceFunction的区别是</span><br><span class="line">	1. SourceFunction 不能设置并行度</span><br><span class="line">	2. ParallelSourceFunction可以设置并行度</span><br><span class="line">	3. 而RichXXX主要是有两个open、close方法，这两个方法可以作为初始化和关闭资源使用。</span><br><span class="line">  	</span><br></pre></td></tr></table></figure>
+<h3 id="自定义MySql的DataSource"><a href="#自定义MySql的DataSource" class="headerlink" title="自定义MySql的DataSource"></a>自定义MySql的DataSource</h3>步骤：<ol>
+<li>继承RichSourceFunction类</li>
+<li>open方法中建立连接</li>
+<li>run方法中执行查询语句。并将数据collect到sourceContetxt中</li>
+<li>close释放连接<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  class MySQLSource(sql:String) extends RichSourceFunction[Liker]&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> connection:Connection = _</span><br><span class="line">  <span class="keyword">var</span> pstmt:PreparedStatement = _</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">open</span><span class="params">(parameters: Configuration)</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">super</span>.open(parameters)</span><br><span class="line">    connection = JdbcUtil.connection</span><br><span class="line">    pstmt = connection.prepareStatement(sql)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">close</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">super</span>.close()</span><br><span class="line">    JdbcUtil.relase(connection,pstmt,<span class="keyword">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">override def <span class="title">run</span><span class="params">(sourceContext: SourceFunction.SourceContext[Liker])</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">var</span> rs = pstmt.executeQuery()</span><br><span class="line">    <span class="keyword">while</span> (rs.next())&#123;</span><br><span class="line">      val liker = Liker(rs.getInt(<span class="number">0</span>),rs.getString(<span class="number">1</span>),rs.getString(<span class="number">2</span>))</span><br><span class="line">      sourceContext.collect(liker)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">cancel</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">	</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Execution-Parameters"><a href="#Execution-Parameters" class="headerlink" title="Execution Parameters"></a>Execution Parameters</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Execution Parameters</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="Controlling-Latency"><a href="#Controlling-Latency" class="headerlink" title="Controlling Latency"></a>Controlling Latency</h3>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Controlling Latency</span><br><span class="line">By default, elements are not transferred on the network one-by-one (which would cause unnecessary network traffic) but are buffered. The size of the buffers (which are actually transferred between machines) can be set in the Flink config files. While this method is good for optimizing throughput, it can cause latency issues when the incoming stream is not fast enough. To control throughput and latency, you can use env.setBufferTimeout(timeoutMillis) on the execution environment (or on individual operators) to set a maximum wait time for the buffers to fill up. After this time, the buffers are sent automatically even if they are not full. The default value for this timeout is 100 ms.</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> env: <span class="type">LocalStreamEnvironment</span> = <span class="type">StreamExecutionEnvironment</span>.createLocalEnvironment</span><br><span class="line">env.setBufferTimeout(timeoutMillis)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">env.generateSequence(1,10).map(myMap).setBufferTimeout(timeoutMillis)</span><br><span class="line">To maximize throughput, set setBufferTimeout(-1) which will remove the timeout and buffers will only be flushed when they are full. To minimize latency, set the timeout to a value close to 0 (for example 5 or 10 ms). A buffer timeout of 0 should be avoided, because it can cause severe performance degradation.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/20/flink/" data-id="ckfbaz8ng00059dcy2iq74jdu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" rel="tag">新建,模板,小书匠</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/20/%E8%AF%AD%E5%BD%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          语录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/20/filename/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">小书匠语法使用手册</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDH%EF%BC%8Cspark/" rel="tag">CDH，spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka-ISR-%E5%89%AF%E6%9C%AC%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" rel="tag">kafka,ISR,副本同步机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E4%B9%A6%E5%8C%A0-%E8%AF%AD%E6%B3%95-MARKDOWN-%E5%B8%AE%E5%8A%A9/" rel="tag">小书匠,语法,MARKDOWN,帮助</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" rel="tag">新建,模板,小书匠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" rel="tag">线程的概念，启动方式，常用方法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CDH%EF%BC%8Cspark/" style="font-size: 10px;">CDH，spark</a> <a href="/tags/kafka-ISR-%E5%89%AF%E6%9C%AC%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" style="font-size: 10px;">kafka,ISR,副本同步机制</a> <a href="/tags/%E5%B0%8F%E4%B9%A6%E5%8C%A0-%E8%AF%AD%E6%B3%95-MARKDOWN-%E5%B8%AE%E5%8A%A9/" style="font-size: 10px;">小书匠,语法,MARKDOWN,帮助</a> <a href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" style="font-size: 10px;">新建,模板,小书匠</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" style="font-size: 10px;">线程的概念，启动方式，常用方法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/20/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%911/">多线程与高并发01</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/CDH%E5%AE%89%E8%A3%85/">CDS安装</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/Kafka%20ISR/">Kakfa的ISR</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/%E8%AF%AD%E5%BD%95/">语录</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/flink/">flink</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

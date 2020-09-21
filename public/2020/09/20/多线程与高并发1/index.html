@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>多线程与高并发01 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="synchronized(Object)object不能用String常量，Integer，Long。因为他们在常量池中，线程之间会共享。加锁可能会加到意料之外的代码中。 线程同步-synchronized     ·锁的是对象，不是代码。     ·synchronized &#x3D;&#x3D; synchronized(XX.class) , 即锁的是当前类的类对象     ·锁定方法，非锁定方法 同时执行会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程与高并发01">
+<meta property="og:url" content="http://example.com/2020/09/20/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%911/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="synchronized(Object)object不能用String常量，Integer，Long。因为他们在常量池中，线程之间会共享。加锁可能会加到意料之外的代码中。 线程同步-synchronized     ·锁的是对象，不是代码。     ·synchronized &#x3D;&#x3D; synchronized(XX.class) , 即锁的是当前类的类对象     ·锁定方法，非锁定方法 同时执行会">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-20T03:36:44.988Z">
+<meta property="article:modified_time" content="2020-09-20T03:36:45.048Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="线程的概念，启动方式，常用方法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-多线程与高并发1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/20/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%911/" class="article-date">
+  <time datetime="2020-09-20T03:36:44.988Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      多线程与高并发01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="synchronized-Object"><a href="#synchronized-Object" class="headerlink" title="synchronized(Object)"></a>synchronized(Object)</h3><pre><code>object不能用String常量，Integer，Long。因为他们在常量池中，线程之间会共享。加锁可能会加到意料之外的代码中。</code></pre>
+<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><pre><code>-synchronized
+    ·锁的是对象，不是代码。
+    ·synchronized == synchronized(XX.class) , 即锁的是当前类的类对象
+    ·锁定方法，非锁定方法 同时执行会造成脏读
+    ·锁升级
+        - 偏向锁 -&gt; 自旋锁 -&gt; 重量级锁
+        - 自旋锁切换到重量级锁的时候需要从用户态切换到内核态</code></pre>
+<h3 id="锁升级过程"><a href="#锁升级过程" class="headerlink" title="锁升级过程"></a>锁升级过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">无锁 --&gt; 偏向锁 --&gt; 自旋锁 --&gt; 重量级锁</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无锁：未加锁态</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">偏向锁(轻量级锁)：加锁的时候加上一个标记，当线程重新去执行时，判断这个标记是否是自己的标记，如果是，直接执行；效率高；</span><br><span class="line">	1.默认情况 偏向锁有个时延，默认是4秒</span><br><span class="line">	2.why? ...</span><br><span class="line">	</span><br><span class="line">	3.上偏向锁，指的就是，把markword的线程ID改为自己的线程ID的过程；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自旋锁：指的是阻塞态的线程通过自旋的方式去获取锁(while(true))，这种方式的好处是，只需要在用户态即可完成，无需切换到内核态。在线程运行时间短，争用的线程少的情况下效率比较高；</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">重量级锁：等待线程挂起，进入等待队列，等待操作系统的调度，然后再映射回用户空间</span><br><span class="line">	优点：不占用cpu；</span><br><span class="line">	缺点：需要从用户态切换到内核态；</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">升级过程：</span><br><span class="line">	1. Object o &#x3D; new Object()</span><br><span class="line">	2. 默认synchronized(o)</span><br><span class="line">		1. 00-&gt;轻量级锁</span><br><span class="line">		2. 默认情况 偏向锁有个时延，默认是4秒 </span><br><span class="line">		3. why? 因为JVM虚拟机自己有一些默认启动的线程，里面有好多sync代码，这些sync代码启动时就知道肯定会有竞争，如果使用偏向锁，就会造成偏向锁不断的进行锁撤销和锁升级的操作，效率较低。</span><br><span class="line">	3. 如果有线程上锁</span><br><span class="line">		1. 上偏向锁，就是把markword的线程ID改为自己的线程ID的过程</span><br><span class="line">	4. 如果有线程竞争</span><br><span class="line">		1. 撤销偏向锁，升级轻量级锁</span><br><span class="line">		2. 线程在自己的线程栈生成LockRecord，用CAS操作将markword设置为指向自己这个线程的LR指针，设置成功者的到锁</span><br><span class="line">		3.  </span><br><span class="line">	5. 如果竞争加剧</span><br><span class="line">		1. 有线程超过10次自旋，-XX:PreBlockSpin可以设置，或者自选线程数超过CPU核数的一半，在jdk1.6之后，加入自适应自旋 Adapative Self Spinning，JVM自己控制 </span><br><span class="line">		2. CPU从3级-0级系统调用，线程挂起，进入等待队列，等待操作系统的调度，然后在映射回用户空间；</span><br><span class="line">	6. </span><br><span class="line">		 </span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/20/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%911/" data-id="ckfbaz8ni00099dcy3u639poq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" rel="tag">线程的概念，启动方式，常用方法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/20/CDH%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CDS安装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDH%EF%BC%8Cspark/" rel="tag">CDH，spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka-ISR-%E5%89%AF%E6%9C%AC%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" rel="tag">kafka,ISR,副本同步机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E4%B9%A6%E5%8C%A0-%E8%AF%AD%E6%B3%95-MARKDOWN-%E5%B8%AE%E5%8A%A9/" rel="tag">小书匠,语法,MARKDOWN,帮助</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" rel="tag">新建,模板,小书匠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" rel="tag">线程的概念，启动方式，常用方法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CDH%EF%BC%8Cspark/" style="font-size: 10px;">CDH，spark</a> <a href="/tags/kafka-ISR-%E5%89%AF%E6%9C%AC%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" style="font-size: 10px;">kafka,ISR,副本同步机制</a> <a href="/tags/%E5%B0%8F%E4%B9%A6%E5%8C%A0-%E8%AF%AD%E6%B3%95-MARKDOWN-%E5%B8%AE%E5%8A%A9/" style="font-size: 10px;">小书匠,语法,MARKDOWN,帮助</a> <a href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" style="font-size: 10px;">新建,模板,小书匠</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" style="font-size: 10px;">线程的概念，启动方式，常用方法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/20/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%911/">多线程与高并发01</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/CDH%E5%AE%89%E8%A3%85/">CDS安装</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/Kafka%20ISR/">Kakfa的ISR</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/%E8%AF%AD%E5%BD%95/">语录</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/flink/">flink</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
