@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Query DSL - Hexo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="Query and Filter context123..."> 
+  
+  <meta name="author" content="John Doe"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_onl0g0h21np.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        onlyPost: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '那是年少，不曾迷茫，不曾失望。'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">Query DSL</div>
+  <div class="right">
+    
+      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+    
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+    </ul>
+    <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Query DSL</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>October 26, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4338</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h2 id="Query-and-Filter-context"><a href="#Query-and-Filter-context" class="headerlink" title="Query and Filter context"></a>Query and Filter context</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Query关注点：此文档与此查询子句的匹配程度如何?</span><br><span class="line">	<span class="number">1</span>）是否包含？</span><br><span class="line">		确定文档是否应该成为结果的一部分</span><br><span class="line">	<span class="number">2</span>）相关度得分多少？</span><br><span class="line">		除了确定文档是否匹配外，查询子句还计算了表示文档与其他文档相匹配的_score</span><br><span class="line">	<span class="number">3</span>）得分越高，相关度越高?</span><br><span class="line">	</span><br><span class="line">Filter关注点：此文档和查询子句匹配么？</span><br><span class="line">	<span class="number">1</span>)是否包含</span><br><span class="line">	<span class="number">2</span>）不涉及评分</span><br><span class="line">	<span class="number">3</span>）针对结构化数据</span><br><span class="line">		适用于完全精确匹配，范围检索</span><br><span class="line">	<span class="number">4</span>)更快</span><br><span class="line">filter查询性能好，可缓存。不许计算得分</span><br><span class="line">query不可缓存；需要计算得分。</span><br><span class="line"></span><br><span class="line">Elasticsearch将创建一个文档匹配过滤器的位集bitset（如果文档匹配则为<span class="number">1</span>，否则为<span class="number">0</span>）。 随后用相同的过滤器执行查询将重用此信息。</span><br><span class="line"></span><br><span class="line">每当添加或更新新文档时，位集bitset也会更新。</span><br><span class="line"></span><br><span class="line">全文检索以及任何使用相关性评分的场景使用query检索。</span><br><span class="line"></span><br><span class="line">除此之外的其他使用filter过滤器过滤。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Compound-queries"><a href="#Compound-queries" class="headerlink" title="Compound queries"></a>Compound queries</h2><h3 id="bool-query"><a href="#bool-query" class="headerlink" title="bool query"></a>bool query</h3><p>多个叶或组合查询语句的默认语句，例如must、should、must_not、filter，must和should子句的分数组合在一起，匹配越多越好，而must_not和filter子句在filter context中执行；</p>
+<h3 id="boosting-query"><a href="#boosting-query" class="headerlink" title="boosting query"></a>boosting query</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回与正相关匹配的文档，但是减少负相关文档的分数；</span><br></pre></td></tr></table></figure>
+
+<h3 id="constant-score-query"><a href="#constant-score-query" class="headerlink" title="constant_score query"></a>constant_score query</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个<span class="keyword">query</span>包装另外的<span class="keyword">query</span>的查询，但是执行在filter context中。全部匹配的文档都使用相同的<span class="string">&quot;constant&quot;</span>_score</span><br></pre></td></tr></table></figure>
+
+<h3 id="dis-max-query"><a href="#dis-max-query" class="headerlink" title="dis_max query"></a>dis_max query</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个查询语句接受多个子查询，返回任意一个匹配任意一个查询语句的文档。当<span class="built_in">bool</span> query合并所有匹配查询的分数时，dis_max查询使用最佳匹配的语句的分数；</span><br></pre></td></tr></table></figure>
+
+<h3 id="function-score-query"><a href="#function-score-query" class="headerlink" title="function_score query"></a>function_score query</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用函数修改主查询返回的分数，以考虑诸如受欢迎程度，新进度，距离或使用脚本实现的自定义算法等；</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="各种查询类型的详细说明"><a href="#各种查询类型的详细说明" class="headerlink" title="各种查询类型的详细说明"></a>各种查询类型的详细说明</h2><h3 id="Boolean-query"><a href="#Boolean-query" class="headerlink" title="Boolean query"></a>Boolean query</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">与文档匹配的查询，该文档与其他查询的<span class="built_in">bool</span>ean组合匹配</span><br><span class="line">使用一个或多个<span class="built_in">bool</span>ean子句，每一个子句都有一个类型</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>occur</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>must</td>
+<td>查询子句必须出现在匹配的文档中，并且匹配的将有助于得分</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>查询子句必须出现在匹配的文档中。但是并不像must 一样，不会进行评分。filter 的子句被执行在filter context中。意味着评分被忽略，并且查询会被考虑加入缓存；</td>
+</tr>
+<tr>
+<td>should</td>
+<td>查询子句应该出现在匹配的文档中</td>
+</tr>
+<tr>
+<td>must_not</td>
+<td>查询子句必须不能出现在匹配的文档中，执行在filter context中，意味着评分被忽略，并且被考虑加入缓存中。由于评分被忽略所以返回的所有文档的评分为0</td>
+</tr>
+</tbody></table>
+<h4 id="Using-minimum-should-match"><a href="#Using-minimum-should-match" class="headerlink" title="Using minimum_should_match"></a>Using minimum_should_match</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用参数minimum_should_match 指定几个或百分数的should子句必须匹配。</span><br><span class="line">如果一个<span class="built_in">bool</span> qurey 包含至少一个should子句，没有must和filter，minimum_should_match默认为<span class="number">1</span>，如果有must或filter默认为<span class="number">0</span>；</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Integer</td>
+<td>3</td>
+<td>指定一个固定的值，与可选子句的数量无关；</td>
+</tr>
+<tr>
+<td>Negative   integer</td>
+<td>-2</td>
+<td>全部的可选子句的数量减去这个值必须被匹配.</td>
+</tr>
+<tr>
+<td>Percentage</td>
+<td>75%</td>
+<td>指定可选子句的总数的百分比必须被匹配,这个值的计算是向下取整的.</td>
+</tr>
+<tr>
+<td>Negative percentage</td>
+<td>-25%</td>
+<td>指定可选子句总数的百分比可以丢失. 计算同样是向下取整的. 然后从总数减去,以确定这个值</td>
+</tr>
+<tr>
+<td>Combination</td>
+<td>3&lt;90%</td>
+<td>一个正整数,跟一个&lt;,在跟一个任意的前面提到的判断条件. 表示如果可选子句的数量小于等于这个integer那么需要全部匹配,但是如果大于这个integer的话就会应用和&lt;后面的判断条件</td>
+</tr>
+<tr>
+<td>Multiple combinations</td>
+<td>2&lt;-25% 9&lt;-3</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">这个查询没有指定评分,所以返回的所有文档评分都为0</span><br><span class="line">GET _search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;term&quot;: &#123;</span><br><span class="line">          &quot;status&quot;: &quot;active&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">这个查询因为有一个match_all query,所以会为每个返回的document分配一个1.0的评分</span><br><span class="line"><span class="builtin-name">GET</span> _search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;bool&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;must&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;match_all&quot;</span>: &#123;&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&quot;filter&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;term&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;status&quot;</span>: <span class="string">&quot;active&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">constant_score 与上面的查询的效果一样</span><br><span class="line"><span class="builtin-name">GET</span> _search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;constant_score&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;filter&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;term&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;status&quot;</span>: <span class="string">&quot;active&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Named-queries"><a href="#Named-queries" class="headerlink" title="Named queries"></a>Named queries</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">每一个<span class="keyword">query</span>接受一个_name在顶级中定义.你可以命名queries对于跟踪哪一个<span class="keyword">query</span>匹配返回的document.如果named queries被使用,响应的hit中会包含match_queries属性</span><br><span class="line"></span><br><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;bool&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;should&quot;</span>: [</span><br><span class="line">        &#123; <span class="string">&quot;match&quot;</span>: &#123; <span class="string">&quot;name.first&quot;</span>: &#123; <span class="string">&quot;query&quot;</span>: <span class="string">&quot;shay&quot;</span>, <span class="string">&quot;_name&quot;</span>: <span class="string">&quot;first&quot;</span> &#125; &#125; &#125;,</span><br><span class="line">        &#123; <span class="string">&quot;match&quot;</span>: &#123; <span class="string">&quot;name.last&quot;</span>: &#123; <span class="string">&quot;query&quot;</span>: <span class="string">&quot;banon&quot;</span>, <span class="string">&quot;_name&quot;</span>: <span class="string">&quot;last&quot;</span> &#125; &#125; &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&quot;filter&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;terms&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;name.last&quot;</span>: [ <span class="string">&quot;banon&quot;</span>, <span class="string">&quot;kimchy&quot;</span> ],</span><br><span class="line">          <span class="string">&quot;_name&quot;</span>: <span class="string">&quot;test&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">返回与<span class="keyword">positive</span>查询匹配的document,同时降低与查询匹配的相关性得分 <span class="keyword">negative</span>.</span><br><span class="line"></span><br><span class="line">可以使用boosting查询来降级某些文档,而不必将他们从搜索结果[排除.</span><br><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;boosting&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;positive&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;term&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;text&quot;</span>: <span class="string">&quot;apple&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&quot;negative&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;term&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;text&quot;</span>: <span class="string">&quot;pie tart fruit crumble tree&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&quot;negative_boost&quot;</span>: <span class="number">0.5</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">positive</span></span><br><span class="line">	要运行的查询.返回的所有文档都必须与此查询匹配</span><br><span class="line"><span class="keyword">negative</span></span><br><span class="line">	查询用于降低匹配文档的相关性得分.</span><br><span class="line">	如果返回的文档与<span class="keyword">positive</span>查询和该查询匹配,则该boosting查询将按照如下计算文档的分</span><br><span class="line">	<span class="number">1</span>,从<span class="keyword">positive</span>查询中获取原始的相关性分数</span><br><span class="line">	<span class="number">2</span>,将分数乘以negative_boost值</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>John Doe</li>
+  <li><strong>本文链接：</strong><a href="http://example.com/2020/10/26/Query%20DSL/index.html">http://example.com/2020/10/26/Query%20DSL/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es-Query-DSL/" rel="tag">es,Query DSL</a></li></ul>
+
+        
+<nav class="nav">
+  
+    <a href="/2020/10/26/Search%20API/"><i class="iconfont iconleft"></i>Search API</a>
+  
+  
+    <a href="/2020/10/26/JavaAPI/">ES JavaAPI<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+      <section class="comments">
+  
+  <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flink - Hexo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="开发文档地址：
+1https://ci.apache...."> 
+  
+  <meta name="author" content="John Doe"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_onl0g0h21np.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        onlyPost: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '那是年少，不曾迷茫，不曾失望。'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">flink</div>
+  <div class="right">
+    
+      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+    
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+    </ul>
+    <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">flink</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>October 26, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4494</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <p>开发文档地址：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>ci.apache.org<span class="regexp">/projects/</span>flink<span class="regexp">/flink-docs-release-1.9/</span>dev/types_serialization.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stateful-Computations-over-Data-Streams"><a href="#Stateful-Computations-over-Data-Streams" class="headerlink" title="Stateful Computations over Data Streams"></a>Stateful Computations over Data Streams</h3><pre><code>离线处理/批处理 有没有状态？ 一般不需要状态
+
+
+Unbound stream  无界的   就是流处理
+bound stream    有界的        批处理
+
+
+flink比较好的：</code></pre>
+<p>Depending on the type of data sources, i.e. bounded or unbounded sources, you would either write a batch program or a streaming program where the DataSet API is used for batch and the DataStream API is used for streaming. </p>
+<h3 id="DataSet-and-DataStream"><a href="#DataSet-and-DataStream" class="headerlink" title="DataSet and DataStream"></a>DataSet and DataStream</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Flink has <span class="keyword">the</span> special classes DataSet <span class="keyword">and</span> DataStream <span class="built_in">to</span> represent data <span class="keyword">in</span> <span class="keyword">a</span> program. You can think <span class="keyword">of</span> them <span class="keyword">as</span> immutable collections <span class="keyword">of</span> data that can contain duplicates. In <span class="keyword">the</span> <span class="keyword">case</span> <span class="keyword">of</span> DataSet <span class="keyword">the</span> data is finite <span class="keyword">while</span> <span class="keyword">for</span> <span class="keyword">a</span> DataStream <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> elements can be unbounded.</span><br><span class="line"></span><br><span class="line">These collections differ <span class="built_in">from</span> regular Java collections <span class="keyword">in</span> some key ways. First, they are immutable, meaning that once they are created you cannot <span class="built_in">add</span> <span class="keyword">or</span> remove elements. You can also <span class="keyword">not</span> simply inspect <span class="keyword">the</span> elements inside.</span><br><span class="line"></span><br><span class="line">A collection is initially created <span class="keyword">by</span> adding <span class="keyword">a</span> source <span class="keyword">in</span> <span class="keyword">a</span> Flink program <span class="keyword">and</span> <span class="built_in">new</span> collections are derived <span class="built_in">from</span> these <span class="keyword">by</span> transforming them <span class="keyword">using</span> API methods such <span class="keyword">as</span> map, <span class="built_in">filter</span> <span class="keyword">and</span> so on.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Anatomy-of-a-Flink-Program"><a href="#Anatomy-of-a-Flink-Program" class="headerlink" title="Anatomy of a Flink Program"></a>Anatomy of a Flink Program</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Flink programs look like regular programs that transform collections <span class="keyword">of</span> data. Each program consists <span class="keyword">of</span> <span class="keyword">the</span> same basic parts:</span><br><span class="line"></span><br><span class="line">Obtain <span class="keyword">an</span> execution environment,</span><br><span class="line">Load/<span class="built_in">create</span> <span class="keyword">the</span> initial data,</span><br><span class="line">Specify transformations <span class="keyword">on</span> <span class="title">this</span> <span class="title">data</span>,</span><br><span class="line">Specify where <span class="built_in">to</span> <span class="built_in">put</span> <span class="keyword">the</span> results <span class="keyword">of</span> your computations,</span><br><span class="line">Trigger <span class="keyword">the</span> program execution</span><br></pre></td></tr></table></figure>
+
+<h3 id="flink的connect算子"><a href="#flink的connect算子" class="headerlink" title="flink的connect算子"></a>flink的connect算子</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">connect算子可以合并两个DataStream对象，两个DataStream的类型不必一致</span><br><span class="line"><span class="class"><span class="keyword">union</span>	算子同样可以合并两个<span class="title">DataStream</span>对象，两个<span class="title">DataStream</span>的类型需要一致</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="flink的自定义分区器"><a href="#flink的自定义分区器" class="headerlink" title="flink的自定义分区器"></a>flink的自定义分区器</h3><p>  步骤：</p>
+<ol>
+<li><p>继承Partitioner类，定义输入类型为范型 </p>
+</li>
+<li><p>实现partition方法</p>
+</li>
+<li><p>返回分区数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  class LikerPartitioner extends Partitioner[String]&#123;</span><br><span class="line">  <span class="function">override def <span class="title">partition</span><span class="params">(key: String, numPartitions: Int)</span>: Int </span>= &#123;</span><br><span class="line">    <span class="keyword">if</span>(key == <span class="string">&quot;liker&quot;</span>)&#123;</span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="string">&quot;erlei&quot;</span>)&#123;</span><br><span class="line">      <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="string">&quot;hehe&quot;</span>)&#123;</span><br><span class="line">      <span class="number">2</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	  <span class="number">3</span></span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义DataSource"><a href="#自定义DataSource" class="headerlink" title="自定义DataSource"></a>自定义DataSource</h3><p> DataSource有如下几种</p>
+<ol>
+<li>SourceFunction</li>
+<li>RichSourceFunction</li>
+<li>ParallelSourceFunction</li>
+<li>RichParallelSourceFunction<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">其中SourceFunction和ParallelSourceFunction的区别是</span><br><span class="line">	<span class="number">1.</span> SourceFunction 不能设置并行度</span><br><span class="line">	<span class="number">2.</span> ParallelSourceFunction可以设置并行度</span><br><span class="line">	<span class="number">3.</span> 而RichXXX主要是有两个open、close方法，这两个方法可以作为初始化和关闭资源使用。</span><br><span class="line">  	</span><br></pre></td></tr></table></figure>
+<h3 id="自定义MySql的DataSource"><a href="#自定义MySql的DataSource" class="headerlink" title="自定义MySql的DataSource"></a>自定义MySql的DataSource</h3>步骤：<ol>
+<li>继承RichSourceFunction类</li>
+<li>open方法中建立连接</li>
+<li>run方法中执行查询语句。并将数据collect到sourceContetxt中</li>
+<li>close释放连接<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  class MySQLSource(sql:String) extends RichSourceFunction[Liker]&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> connection:Connection = _</span><br><span class="line">  <span class="keyword">var</span> pstmt:PreparedStatement = _</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">open</span><span class="params">(parameters: Configuration)</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">super</span>.open(parameters)</span><br><span class="line">    connection = JdbcUtil.connection</span><br><span class="line">    pstmt = connection.prepareStatement(sql)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">close</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">super</span>.close()</span><br><span class="line">    JdbcUtil.relase(connection,pstmt,<span class="keyword">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">override def <span class="title">run</span><span class="params">(sourceContext: SourceFunction.SourceContext[Liker])</span>: Unit </span>= &#123;</span><br><span class="line">    <span class="keyword">var</span> rs = pstmt.executeQuery()</span><br><span class="line">    <span class="keyword">while</span> (rs.next())&#123;</span><br><span class="line">      val liker = Liker(rs.getInt(<span class="number">0</span>),rs.getString(<span class="number">1</span>),rs.getString(<span class="number">2</span>))</span><br><span class="line">      sourceContext.collect(liker)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">cancel</span><span class="params">()</span>: Unit </span>= &#123;</span><br><span class="line">	</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Execution-Parameters"><a href="#Execution-Parameters" class="headerlink" title="Execution Parameters"></a>Execution Parameters</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Execution <span class="keyword">Parameters</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="Controlling-Latency"><a href="#Controlling-Latency" class="headerlink" title="Controlling Latency"></a>Controlling Latency</h3>   <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Controlling Latency</span><br><span class="line">By default, elements are <span class="keyword">not</span> transferred on the<span class="built_in"> network </span>one-by-one (which would cause unnecessary<span class="built_in"> network </span>traffic) but are buffered. The size of the buffers (which are actually transferred between machines) can be <span class="builtin-name">set</span> <span class="keyword">in</span> the Flink<span class="built_in"> config </span>files. <span class="keyword">While</span> this method is good <span class="keyword">for</span> optimizing throughput, it can cause latency issues when the<span class="built_in"> incoming </span>stream is <span class="keyword">not</span> fast enough. <span class="keyword">To</span> control throughput <span class="keyword">and</span> latency, you can use env.setBufferTimeout(timeoutMillis) on the execution environment (<span class="keyword">or</span> on individual operators) <span class="keyword">to</span> <span class="builtin-name">set</span> a maximum wait time <span class="keyword">for</span> the buffers <span class="keyword">to</span> fill up. After this time, the buffers are sent automatically even <span class="keyword">if</span> they are <span class="keyword">not</span> full. The<span class="built_in"> default </span>value <span class="keyword">for</span> this timeout is 100 ms.</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> env: <span class="type">LocalStreamEnvironment</span> = <span class="type">StreamExecutionEnvironment</span>.createLocalEnvironment</span><br><span class="line">env.setBufferTimeout(timeoutMillis)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">env.generateSequence(1,10).map(myMap).setBufferTimeout(timeoutMillis)</span><br><span class="line">To maximize throughput, <span class="keyword">set</span> setBufferTimeout(<span class="number">-1</span>) which will remove the <span class="keyword">timeout</span> <span class="keyword">and</span> buffers will <span class="keyword">only</span> be flushed <span class="keyword">when</span> they <span class="keyword">are</span> full. <span class="keyword">To</span> minimize latency, <span class="keyword">set</span> the <span class="keyword">timeout</span> <span class="keyword">to</span> a <span class="keyword">value</span> <span class="keyword">close</span> <span class="keyword">to</span> <span class="number">0</span> (<span class="keyword">for</span> example <span class="number">5</span> <span class="keyword">or</span> <span class="number">10</span> ms). A buffer <span class="keyword">timeout</span> <span class="keyword">of</span> <span class="number">0</span> should be avoided, because it can cause severe <span class="keyword">performance</span> degradation.</span><br></pre></td></tr></table></figure>
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>John Doe</li>
+  <li><strong>本文链接：</strong><a href="http://example.com/2020/10/26/flink/index.html">http://example.com/2020/10/26/flink/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%BB%BA-%E6%A8%A1%E6%9D%BF-%E5%B0%8F%E4%B9%A6%E5%8C%A0/" rel="tag">新建,模板,小书匠</a></li></ul>
+
+        
+<nav class="nav">
+  
+    <a href="/2020/10/26/%E8%AF%AD%E5%BD%95/"><i class="iconfont iconleft"></i>语录</a>
+  
+  
+    <a href="/2020/10/26/filename/">小书匠语法使用手册<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+      <section class="comments">
+  
+  <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>

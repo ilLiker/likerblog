@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search APIS - Hexo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="Search APISRequest Body Sea..."> 
+  
+  <meta name="author" content="John Doe"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_onl0g0h21np.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        onlyPost: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '那是年少，不曾迷茫，不曾失望。'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">Search APIS</div>
+  <div class="right">
+    
+      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+    
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+    </ul>
+    <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Search APIS</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>October 26, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2446</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="Search-APIS"><a href="#Search-APIS" class="headerlink" title="Search APIS"></a>Search APIS</h1><h2 id="Request-Body-Search"><a href="#Request-Body-Search" class="headerlink" title="Request Body Search"></a>Request Body Search</h2><h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><h3 id="From-Size"><a href="#From-Size" class="headerlink" title="From/Size"></a>From/Size</h3><h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">可以指定一个或多个字段排序。每一个字段都可以被逆序排序。被定义在字段级别上。特殊的字段_score指定被score排序，_doc指定按照索引顺序排序。</span><br><span class="line"></span><br><span class="line">_doc除了是一个有效的排序方式之外，没有任何真实的使用场景，如果你不关心文档的返回顺序，你应该用_doc，这个在scrolling中特别有用。</span><br><span class="line"></span><br><span class="line"><span class="builtin-name">GET</span> /my_index/_search</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;sort&quot;</span>: [</span><br><span class="line">		&#123;<span class="string">&quot;post_date&quot;</span> : &#123;<span class="string">&quot;order&quot;</span>:<span class="string">&quot;asc&quot;</span>&#125;&#125;,</span><br><span class="line">		<span class="string">&quot;user&quot;</span></span><br><span class="line">		&#123;<span class="string">&quot;name&quot;</span>,<span class="string">&quot;desc&quot;</span>&#125;,</span><br><span class="line">		&#123;<span class="string">&quot;age&quot;</span>:<span class="string">&quot;desc&quot;</span>&#125;,</span><br><span class="line">		<span class="string">&quot;_score&quot;</span></span><br><span class="line">	],</span><br><span class="line">	<span class="string">&quot;query&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;term&quot;</span> : &#123;<span class="string">&quot;user&quot;</span>:<span class="string">&quot;kimchy&quot;</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sort mode option</span><br><span class="line">指定使用哪一种模式排序，可选如下几项</span><br><span class="line">min,max,sum,avg,median,</span><br><span class="line"></span><br><span class="line">POST /_search</span><br><span class="line">&#123;</span><br><span class="line">   <span class="string">&quot;query&quot;</span> : &#123;</span><br><span class="line">      <span class="string">&quot;term&quot;</span> : &#123; <span class="string">&quot;product&quot;</span> : <span class="string">&quot;chocolate&quot;</span> &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="string">&quot;sort&quot;</span> : [</span><br><span class="line">      &#123;<span class="string">&quot;price&quot;</span> : &#123;<span class="string">&quot;order&quot;</span> : <span class="string">&quot;desc&quot;</span>, <span class="string">&quot;mode&quot;</span> : <span class="string">&quot;sum&quot;</span>&#125;&#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">####</span></span><br><span class="line">Sorting within nested objects</span><br><span class="line">es也支持在一个或多个对象里面对字段进行排序。支持如下选项进行排序：</span><br><span class="line">path</span><br><span class="line">	定义在哪一个对象排序。实际排序的字段必须是嵌套对象的直接字段。当使用嵌套字段排序时，这个字段是必填的。</span><br><span class="line">filter</span><br><span class="line"></span><br><span class="line">max_children</span><br><span class="line"></span><br><span class="line">nested</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Source-filtering"><a href="#Source-filtering" class="headerlink" title="Source filtering"></a>Source filtering</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">用来控制怎样处理_source字段返回的结果</span><br><span class="line">1.禁用_source获取 设置为<span class="literal">false</span></span><br><span class="line"><span class="builtin-name">GET</span> /_search</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_source&quot;</span> : <span class="literal">false</span>,</span><br><span class="line">	<span class="string">&quot;query&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;term&quot;</span>: &#123;</span><br><span class="line">			<span class="string">&quot;user&quot;</span>:<span class="string">&quot;kimchy&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">2.使用通配符过滤</span><br><span class="line"><span class="builtin-name">GET</span> /_search</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_source&quot;</span>: <span class="string">&quot;obj.&quot;</span>,</span><br><span class="line">	<span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">		<span class="string">&quot;term&quot;</span>: &#123;<span class="string">&quot;user&quot;</span>:<span class="string">&quot;kimchy&quot;</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">OR</span></span><br><span class="line"><span class="builtin-name">GET</span> /_search</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_source&quot;</span>:[<span class="string">&quot;obj1.*&quot;</span>，<span class="string">&quot;obj2.*&quot;</span>],</span><br><span class="line">	<span class="string">&quot;query&quot;</span>: &#123;</span><br><span class="line">		<span class="string">&quot;term&quot;</span>: &#123;<span class="string">&quot;user&quot;</span>:<span class="string">&quot;kimchy&quot;</span>&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line">3.指定 includes 和 excludes</span><br><span class="line"><span class="builtin-name">GET</span> /_search</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_source&quot;</span> :&#123;</span><br><span class="line">		<span class="string">&quot;includes&quot;</span>: [<span class="string">&quot;obj1.*&quot;</span>,<span class="string">&quot;obj2.*&quot;</span>],</span><br><span class="line">		<span class="string">&quot;encludes&quot;</span>: [*.description]</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">&quot;query&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;term&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;user&quot;</span>:<span class="string">&quot;kimchy&quot;</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Search-Type"><a href="#Search-Type" class="headerlink" title="Search Type"></a>Search Type</h3><h4 id="Query-Then-Fetch"><a href="#Query-Then-Fetch" class="headerlink" title="Query Then Fetch"></a>Query Then Fetch</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Parameter value: query_then_fetch</span><br><span class="line">	这个请求处理由两个阶段完成;</span><br><span class="line">	第一个阶段,查询将请求所有相关的shards,每一个shard执行search并产生一个排序的本地shard的结果集。每一个shard返回足够的信息到coordinating <span class="keyword">node</span><span class="title">，以使得它能够合并和re-sort</span>这shard level的结果集到一个全局的，最大长度的结果集。</span><br><span class="line">	</span><br><span class="line">	第二阶段，coordination <span class="keyword">node</span> <span class="title">只从相关的节点请求document</span>的内容。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dfs，Query-Then-Fetch"><a href="#Dfs，Query-Then-Fetch" class="headerlink" title="Dfs，Query Then Fetch"></a>Dfs，Query Then Fetch</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">与<span class="keyword">Query</span> Then Fetch不同之处在于，在分散阶段就会计算分布项的词频为了更精确的评分。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>John Doe</li>
+  <li><strong>本文链接：</strong><a href="http://example.com/2020/10/26/es/Search%20APIS/index.html">http://example.com/2020/10/26/es/Search%20APIS/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+<nav class="nav">
+  
+    <a href="/2020/10/26/JavaAPI/"><i class="iconfont iconleft"></i>ES JavaAPI</a>
+  
+  
+    <a href="/2020/10/26/es/Search%20API/">Search API<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+      <section class="comments">
+  
+  <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
