@@ -17,7 +17,6 @@ GET /my_index/_search
   }
 }
 如上例子，查询是根据type来进行分桶，类似 SQL中的GROUP BY type
-			之所以使用type.keyword是因为聚合操作不支持text字段
 如下为查询结果：
 {
   "took" : 1,
@@ -68,6 +67,113 @@ GET /my_index/_search
   }
 }
 ```
+
+### 常见的分桶策略
+
+#### Terms
+
+```
+该分桶策略最简单，直接按照term来分桶，如果是text类型，则按照分次后的结果分桶
+```
+
+#### Range
+
+````
+通过指定数值的范围来设定分桶规则
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "age_range": {
+      "range": {
+        "field": "age",
+        "ranges": [
+          {
+            "to": 10
+          },{
+            "from": 10,
+            "to": 20
+          },{
+            "from": 20
+          }
+        ]
+      }
+    }
+  }
+}
+````
+
+#### Date Range
+
+```
+通过指定日期的范围来设定分桶规则
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "date_range": {
+      "range": {
+        "field": "birth",
+        "format":"yyyy",
+        "ranges": [
+          {
+            "from": "1980",
+            "to": "1990"
+          },{
+            "from": "1990",
+            "to":"2000"
+          },
+          {
+            "from": "2000"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Histogram
+
+```
+直方图，以固定的间隔策略来分隔数据
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "salary_hits": {
+      "histogram": {
+        "field": "age",
+        "interval": 5,
+        "extended_bounds": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    }
+  }
+}
+```
+
+#### Date Histogram
+
+```
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "by_year": {
+      "date_histogram": {
+        "field": "brith",
+        "interval": "year",
+        "format": "yyyy"
+      }
+    }
+  }
+}
+```
+
+
 
 ## Metric
 
@@ -130,16 +236,163 @@ GET /my_index/_search
 #### stats/extended stats
 
 ```
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "stats_age": {
+      "extended_stats": {
+        "field": "age"
+      }
+    }
+  }
+}
 
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "stats_age": {
+      "stats": {
+        "field": "age"
+      }
+    }
+  }
+}
 ```
 
+#### percentile,percentile rank
 
+```
+#百分位数统计
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_age": {
+      "percentiles": {
+        "field": "age",
+        "percents": [
+          1,
+          5,
+          25,
+          50,
+          75,
+          95,
+          99
+        ]
+      }
+    }
+  }
+}
+# 百分位数统计
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_salary": {
+      "percentile_ranks": {
+        "field": "age",
+        "values": [
+          10,
+          15
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Top Hits
+
+```
+一般用于分桶后获取该桶内最匹配的顶部文档列表，即详情数据
+
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "jobs": {
+      "terms": {
+        "field": "type.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "top_ages": {
+          "top_hits": {
+            "size": 10,
+            "sort": [
+              {
+                "age": {
+                  "order": "desc"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ## Pipeline
 
 ```
 管道分析类型，基于上一级的聚合分析结果进行再分析
+
+针对聚合分析的结果再次进行聚合分析，而且支持链式调用，可以回答如下问题：
+	订单月平均销售额是多少？
+POST /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "sales_per_month": {
+      "date_histogram": {
+        "field": "date",
+        "interval": "month"
+      },
+      "aggs": {
+        "sales": {
+            "sum": {
+              "field": "price"
+            }
+        }
+      }
+    },
+    "avg_monthly_sales":{
+      "avg_bucket": {
+        "buckets_path": "sales_per_month>sales"
+      }
+    }
+  }
+}
+	
 ```
+
+### Pipeline的分析结果会输出到原结果中，根据输出位置的不同，分为一下两类：
+
+#### Parent
+
+```
+结果内嵌到现有的聚合分析结果中
+Derivative
+Moving Average
+Cumulative Sum
+```
+
+#### Sibling
+
+```
+结果与现有聚合分析结果同级
+Max/Min/Avg/Sum Bucket
+Stats/Extended Stats Bucket
+Percentiles Bucket
+```
+
+
+
+#### 
 
 ## Matrix
 
@@ -147,6 +400,68 @@ GET /my_index/_search
 矩阵分析类型
 
 ```
+
+### Bucket + Metric
+
+```
+Bucket聚合分析允许通过添加子分析来进一步进行分析，该子分析可以是Bucket也可以是Metric。
+分桶后再分桶
+
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "types": {
+      "terms": {
+        "field": "type.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "age_range": {
+          "range": {
+            "field": "age",
+            "ranges": [
+              {
+                "from": 0,
+                "to": 10
+              },{
+                "from": 10,
+                "to": 20
+              },{
+                "from": 20,
+                "to": 30
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+#分桶后数据分析
+GET /my_index/_search
+{
+  "size": 0,
+  "aggs": {
+    "types": {
+      "terms": {
+        "field": "type.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "type_stats": {
+          "stats": {
+            "field": "age"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+
 
 # 测试数据
 
