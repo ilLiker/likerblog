@@ -21,3 +21,7 @@ Title: 并差集结构
 ![image-20201117195251901](并差集结构_image.assets/image-20201117195251901.png)
 
 ![image-20201117195634464](并差集结构_image.assets/image-20201117195634464.png)
+
+![image-20201118152608620](并差集结构_image.assets/image-20201118152608620.png)
+
+![image-20201118155605876](并差集结构_image.assets/image-20201118155605876.png)
