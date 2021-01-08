@@ -16,35 +16,35 @@ Title: 系统初始化器概览
 
 工厂加载机制
 
-![image-20201224110932597](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224110932597.png)
+![image-20201224110932597](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224110932597.png)
 
-![image-20201224111038037](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224111038037.png)
+![image-20201224111038037](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224111038037.png)
 
-![image-20201224140642428](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224140642428.png)
+![image-20201224140642428](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224140642428.png)
 
-![image-20201224140700197](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224140700197.png)
+![image-20201224140700197](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224140700197.png)
 
 ## 系统初始化器原理解析
 
-![image-20201224140855596](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224140855596.png)
+![image-20201224140855596](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224140855596.png)
 
-![image-20201224140902580](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224140902580.png)
+![image-20201224140902580](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224140902580.png)
 
 
 
 ## 总结
 
-![image-20201224171415733](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224171415733.png)
+![image-20201224171415733](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224171415733.png)
 
-![image-20201224171441327](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224171441327.png) 
+![image-20201224171441327](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224171441327.png) 
 
-![image-20201224171601568](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224171601568.png)
+![image-20201224171601568](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224171601568.png)
 
-![image-20201224171804476](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224171804476.png)
+![image-20201224171804476](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224171804476.png)
 
-![image-20201224172022274](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224172022274.png)
+![image-20201224172022274](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224172022274.png)
 
-![image-20201224172052644](C:\Users\LENOVO\AppData\Roaming\Typora\typora-user-images\image-20201224172052644.png)
+![image-20201224172052644](D:\devwork\typora\likerblog\source\_posts\springboot源码\image\image-20201224172052644.png)
 
 ```
     SpringApplication.run(DemoApplication.class, args){
